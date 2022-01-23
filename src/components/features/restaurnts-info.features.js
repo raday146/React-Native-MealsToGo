@@ -1,15 +1,17 @@
 import React from "react";
 import { Image, View } from "react-native";
 import styled from "styled-components";
-import { Card, Text } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 import star from "../../../assets/star";
 import open from "../../../assets/open";
 import Spacer from "../spacer.components";
+import Text from "../typography/text.component";
 
 const RestaurantCard = styled(Card)`
   elevation: 5;
   background-color: ${(props) => props.theme.colors.bg.primary};
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 const RestaurantCardCover = styled(Card.Cover)`
   padding: ${(props) => props.theme.lineHeights.copy};
@@ -17,17 +19,13 @@ const RestaurantCardCover = styled(Card.Cover)`
 const Info = styled(View)`
   padding: ${(props) => props.theme.space[3]};
 `;
-const Title = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.heading}
-  font-size:  ${(props) => props.theme.fontSizes.body}
-  color: ${(props) => props.theme.colors.ui.primary};
-`;
+
 const Rating = styled(View)`
   flex-direction: row;
   margin-top: ${(props) => props.theme.space[2]};
   margin-bottom: ${(props) => props.theme.space[2]};
 `;
-const Address = styled(Text)`
+const Address = styled.Text`
   font-family: ${(props) => props.theme.fonts.body}
   font-size:  ${(props) => props.theme.fontSizes.captions}
 `;
@@ -59,7 +57,7 @@ const RestaurantInfo = ({ restaurant = {} }) => {
     <RestaurantCard>
       <RestaurantCardCover source={{ uri: photos[0] }} />
       <Info>
-        <Title>{name}</Title>
+        <Text>{name}</Text>
         <Section>
           <Rating>
             {ratingArray.map(() => (
@@ -72,10 +70,12 @@ const RestaurantInfo = ({ restaurant = {} }) => {
                 CLOSED TEMPORARILY
               </Text>
             )}
-            <Spacer variant={"left.large"} />
-            {isOpen && <SvgXml xml={open} width={20} height={20} />}
-            <Spacer variant={"left.large"} />
-            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            <Spacer position="left" size="large">
+              {isOpen && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="large">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
 
