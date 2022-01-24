@@ -42,14 +42,12 @@ const SectionEnd = styled(View)`
 
 const RestaurantInfo = ({ restaurant = {} }) => {
   const {
-    name = "some restaurant",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    photos = [
-      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-    ],
+    name,
+    icon,
+    photos,
     address = "some address",
-    isOpen = true,
-    rating = 3,
+    isOpen,
+    rating,
     isCloseTemporarily = false,
   } = restaurant;
   const ratingArray = Array.from(new Array(Math.ceil(rating)));

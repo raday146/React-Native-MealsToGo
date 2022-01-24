@@ -13,6 +13,9 @@ import { useFonts as useLata, Lato_400Regular } from "@expo-google-fonts/lato";
 import { SafeArea } from "./src/components/utils/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
 import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import { RestaurantsProvider } from "./src/services/restauransts/restaurants.context";
+import { LocationProvider } from "./src/services/restauransts/location/location.context";
+
 const Tab = createBottomTabNavigator();
 const Setting = () => (
   <SafeArea>
@@ -39,11 +42,11 @@ const createScreenOptions = ({ route }) => {
   };
 };
 const App = () => {
-  const [oswaldLoaded] = useOswald({
+  let [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
 
-  const [latoLoaded] = useLata({
+  let [latoLoaded] = useLata({
     Lato_400Regular,
   });
 
@@ -53,21 +56,25 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              activeTintColor: "tomato",
-              invactiveTintColor: "gray",
-            }}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={Map} />
-            <Tab.Screen name="Settings" component={Setting} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <LocationProvider>
+          <RestaurantsProvider>
+            <NavigationContainer>
+              <Tab.Navigator
+                screenOptions={createScreenOptions}
+                tabBarOptions={{
+                  activeTintColor: "tomato",
+                  invactiveTintColor: "gray",
+                }}
+              >
+                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                <Tab.Screen name="Map" component={Map} />
+                <Tab.Screen name="Settings" component={Setting} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </RestaurantsProvider>
+        </LocationProvider>
       </ThemeProvider>
-      <ExpoStatusBar />
+      <ExpoStatusBar style="auto" />
     </>
   );
 };
