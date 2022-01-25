@@ -1,15 +1,11 @@
 import React, { useContext } from "react";
 import { FlatList, View } from "react-native";
-import { Searchbar } from "react-native-paper";
 import styled from "styled-components";
 import RestaurantInfo from "../features/restaurnts-info.features";
 import { SafeArea } from "../utils/safe-area.component";
 import { RestaurantContext } from "../../services/restauransts/restaurants.context";
-import { LocationContext } from "../../services/restauransts/location/location.context";
 import Spinner from "../utils/spinner.component";
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
+import Search from "../search.component";
 
 const RestaurntsContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
@@ -21,9 +17,7 @@ const RestaurantsScreen = () => {
   return (
     (isLoading && <Spinner />) || (
       <SafeArea>
-        <SearchContainer>
-          <Searchbar />
-        </SearchContainer>
+        <Search />
         <RestaurntsContainer>
           <FlatList
             data={restaurants}
