@@ -1,10 +1,8 @@
 import { mocks, mockImages } from "./mock";
 import camelize from "camelize";
 export const restaurantReq = (loc) => {
-  console.log(loc, "req");
   return new Promise((resolve, reject) => {
     const mock = mocks[loc];
-    console.log(mock);
     if (!mock) {
       reject("not found");
     }
@@ -20,7 +18,10 @@ export const restTransform = ({ results = [] }) => {
     return {
       ...restaurant,
       isOpen: restaurant.opening_hours && restaurant.opening_hours.open_now,
-      isClosedTemporarily: restaurant.business_status === "CLOSED_TEMPORARILY",
+      address: restaurant.vicinity,
+      isClosedTemporarily:
+        restaurant.permanently_closed ||
+        restaurant.business_status === "CLOSED_TEMPORARILY",
     };
   });
   const newRes = camelize(mappedData);

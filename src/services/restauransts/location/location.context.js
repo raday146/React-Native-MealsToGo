@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useState, createContext, useCallback } from "react";
 
 import { locationReq, locationTransform } from "./location.service";
 
@@ -28,15 +22,15 @@ export const LocationProvider = ({ children }) => {
         .then(locationTransform)
         .then((result) => {
           setLocation(result);
+          setKeyword("");
           setIsLoading(false);
         })
-        .catch((error) => {
-          setError(error);
+        .catch((err) => {
+          setError(err);
           setIsLoading(false);
         });
     }, 2000);
   }, []);
-
   return (
     <LocationContext.Provider
       value={{ location, isLoading, error, search: onSearch, keyword }}

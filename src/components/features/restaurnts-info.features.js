@@ -45,10 +45,11 @@ const RestaurantInfo = ({ restaurant = {} }) => {
     name,
     icon,
     photos,
-    address = "some address",
+    address,
+    placeId,
     isOpen,
     rating,
-    isCloseTemporarily = false,
+    isClosedTemporarily,
   } = restaurant;
   const ratingArray = Array.from(new Array(Math.ceil(rating)));
   return (
@@ -58,13 +59,18 @@ const RestaurantInfo = ({ restaurant = {} }) => {
         <Text>{name}</Text>
         <Section>
           <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArray.map((_, id) => (
+              <SvgXml
+                key={`star-${placeId}-${id}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>
-            {isCloseTemporarily && (
-              <Text variant="label" style={{ color: "red" }}>
+            {isClosedTemporarily && (
+              <Text variant="error" style={{ color: "red" }}>
                 CLOSED TEMPORARILY
               </Text>
             )}

@@ -9,9 +9,8 @@ const SearchContainer = styled.View`
 const Search = () => {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
-
   useEffect(() => {
-    if (keyword !== searchKeyword) {
+    if (keyword) {
       search(searchKeyword);
     }
   }, [keyword, search, searchKeyword]);

@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  useContext,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { LocationContext } from "./location/location.context";
 import { restaurantReq, restTransform } from "./restaurants.service";
 
@@ -25,12 +18,9 @@ export const RestaurantsProvider = ({ children }) => {
         .then((res) => {
           setRestaurants(res);
           setIsLoading(false);
-          console.log(restaurants, "done");
         })
-        .catch((error) => {
-          setError(error);
-          console.log(error, "done");
-
+        .catch((err) => {
+          setError(err);
           setIsLoading(false);
         });
     }, 2000);

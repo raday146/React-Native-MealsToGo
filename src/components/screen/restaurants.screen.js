@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 import styled from "styled-components";
 import RestaurantInfo from "../features/restaurnts-info.features";
 import { SafeArea } from "../utils/safe-area.component";
@@ -13,7 +13,7 @@ const RestaurntsContainer = styled.View`
 `;
 
 const RestaurantsScreen = () => {
-  const { restaurants, isLoading, error } = useContext(RestaurantContext);
+  const { restaurants, isLoading } = useContext(RestaurantContext);
   return (
     (isLoading && <Spinner />) || (
       <SafeArea>
