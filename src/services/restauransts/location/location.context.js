@@ -22,14 +22,14 @@ export const LocationProvider = ({ children }) => {
         .then(locationTransform)
         .then((result) => {
           setLocation(result);
-          setKeyword("");
+          ///  setKeyword("");
           setIsLoading(false);
         })
         .catch((err) => {
           setError(err);
           setIsLoading(false);
         });
-    }, 2000);
+    }, 1000);
   }, []);
   return (
     <LocationContext.Provider

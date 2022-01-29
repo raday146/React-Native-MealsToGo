@@ -7,7 +7,6 @@ import star from "../../../assets/star";
 import open from "../../../assets/open";
 import Spacer from "../spacer.components";
 import Text from "../typography/text.component";
-
 const RestaurantCard = styled(Card)`
   elevation: 5;
   background-color: ${(props) => props.theme.colors.bg.primary};
