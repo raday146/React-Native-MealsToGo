@@ -22,6 +22,7 @@ color: ${theme.colors.text.error};
 const caption = (theme) => `
 font-weight: ${theme.fontWeights.bold};
 font-size: ${theme.fontSizes.caption};
+
 `;
 
 const label = (theme) => `

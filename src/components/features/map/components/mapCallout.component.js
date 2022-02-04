@@ -21,8 +21,8 @@ const MapItem = styled.View`
 `;
 
 const isAndroid = Platform.OS === "android";
-const MapCallout = ({ name, icon }) => {
-  const Image = isAndroid ? CompactWebView : CompactImage;
+const MapCallout = ({ name, icon, isMap }) => {
+  const Image = isAndroid && isMap ? CompactWebView : CompactImage;
 
   return (
     <MapItem>

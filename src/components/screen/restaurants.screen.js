@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import RestaurantInfo from "../features/restaurnts-info.features";
 import { SafeArea } from "../utils/safe-area.component";
-import FavouritesBar from "../favourites/Favourites-bar.component";
+import FavouritesBar from "../favourites/FavouritesBar.component";
 import { RestaurantContext } from "../../services/restauransts/restaurants.context";
 import Spinner from "../utils/spinner.component";
 import Search from "../search.component";
@@ -20,7 +20,6 @@ const RestaurantsScreen = ({ navigation }) => {
   const goTo = (subComponentName, componentDetial) => {
     navigation.navigate(subComponentName, componentDetial);
   };
-  console.log(isToggled, "toggled");
   return (
     (isLoading && <Spinner />) || (
       <SafeArea>
@@ -28,7 +27,8 @@ const RestaurantsScreen = ({ navigation }) => {
           isFavouritesToggled={isToggled}
           onFavouritesToggle={() => setToggle(!isToggled)}
         />
-        {isToggled && console.log(favourites) && (
+
+        {isToggled && !!favourites && (
           <FavouritesBar favourites={favourites} onDetail={goTo} />
         )}
         <RestaurntsContainer>

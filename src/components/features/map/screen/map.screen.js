@@ -49,6 +49,7 @@ const MapScreen = ({ navigation }) => {
                 }
               >
                 <MapCallout
+                  isMap
                   name={restaurant.name}
                   icon={restaurant.photos[0]}
                 />

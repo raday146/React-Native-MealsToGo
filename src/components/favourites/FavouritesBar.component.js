@@ -1,16 +1,17 @@
 import React from "react";
 import { ScrollView, TouchableOpacity } from "react-native";
 import styled from "styled-components";
-import RestaurantInfo from "../features/restaurnts-info.features";
+import { RestaurantInfoComponent } from "../features/restaurnts-info.features";
+import MapCallout from "../features/map/components/mapCallout.component";
 import Spacer from "../spacer.components";
-import { Text } from "../typography/text.component";
+import Text from "../typography/text.component";
 
 const FavouritesWrapper = styled.View`
   padding: 10px;
 `;
 const FavouritesBar = ({ favourites, onDetail }) => {
-  if (!favourites) {
-    console.log("nothing");
+  if (favourites.length === 0) {
+    console.log("nothing end fast");
     return null;
   }
   return (
@@ -26,7 +27,10 @@ const FavouritesBar = ({ favourites, onDetail }) => {
               <TouchableOpacity
                 onPress={() => onDetail("RestaurantDetail", { restaurant })}
               >
-                <RestaurantInfo restaurant={restaurant} />
+                <MapCallout
+                  name={restaurant.name}
+                  icon={restaurant.photos[0]}
+                />
               </TouchableOpacity>
             </Spacer>
           );
