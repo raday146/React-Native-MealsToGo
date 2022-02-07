@@ -12,11 +12,8 @@ import { LocationProvider } from "./src/services/location/location.context";
 import Navigation from "./src/components/infrastracture/navigation";
 import FavouritesProvider from "./src/services/favourites/favourites.context";
 import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-import { config } from "./firebase/firebaseConfig";
-
-const firebase = config();
+import { AuthenticationProvider } from "./src/services/authetication/authetication.context";
 const App = () => {
-  const [isAuth, setAuth] = useState(false);
   let [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -24,20 +21,7 @@ const App = () => {
   let [latoLoaded] = useLata({
     Lato_400Regular,
   });
-  useEffect(() => {
-    if (!firebase.apps.length) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("email@gmail.com", "1234567")
-        .then((user) => {
-          console.log(user);
-          setAuth(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }, []);
+
   if (!oswaldLoaded && !latoLoaded) {
     return null;
   }
@@ -45,13 +29,15 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesProvider>
-          <LocationProvider>
-            <RestaurantsProvider>
-              <Navigation />
-            </RestaurantsProvider>
-          </LocationProvider>
-        </FavouritesProvider>
+        <AuthenticationProvider>
+          <FavouritesProvider>
+            <LocationProvider>
+              <RestaurantsProvider>
+                <Navigation />
+              </RestaurantsProvider>
+            </LocationProvider>
+          </FavouritesProvider>
+        </AuthenticationProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
